@@ -1,5 +1,5 @@
 $(function () {
-    var NAVPath = "nav.html";
+    /*var NAVPath = "nav.html";
     if (location.pathname.split('/').slice(-1)[0] == "index.html") {
         NAVPath = "html/nav.html";
     };
@@ -9,6 +9,5 @@ $(function () {
         $('#navToggle').click(function () {
             $('#mainHeader nav').toggleClass('showNav'); //Toggles the navbar visibility
         });
-    });
-
+    });*/
 });
