@@ -5,7 +5,7 @@ self.addEventListener('install', function (event) {
         '/dynast.github.io/',
         '/dynast.github.io/index.html',
         '/dynast.github.io/scripts/app.js',
-        '/dynast.github.io/scripts/sw.js',
+        '/dynast.github.io/sw.js',
         '/dynast.github.io/scripts/jquery-3.3.1.min.js',
         '/dynast.github.io/scripts/main.js'
       ]);
