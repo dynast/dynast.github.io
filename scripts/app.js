@@ -1,6 +1,6 @@
 $(function () {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('scripts/sw.js', {
+        navigator.serviceWorker.register('/scripts/sw.js', {
             scope: '/dynast.github.io/'
         }).then(function (reg) {
 
