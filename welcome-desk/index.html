@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Welcome</title>
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+   		<meta charset="UTF-8"> 
+		<link href="styles/display.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery-ui-1.10.3.custom.min.js"></script>
+		<script type="text/javascript" src="scripts/raf.js"></script>
+		<script type="application/javascript">
+			
+			var contentList = [];
+			var stuff = false;
+			
+			function init(){
+				
+				pJSONFile("welcome-data.json"); //Parse JSON file that contains the info
+				
+				rotateBKGD();
+				
+			}
+			
+			function pJSONFile(LOC) {
+				var wData = $.getJSON(LOC, function () {
+
+				}).done(function (data) {
+
+					var items = data.display;
+
+					$.each(items, function (key, val) {
+
+						contentList.push(items[key]);
+
+					});
+					
+					loadContent();
+
+				});
+			}
+			
+			function loadContent(){
+				
+				var cBox = $('#wContent');
+				
+				$(contentList).each(function(index){
+					if(contentList[index].logo){
+						cBox.append('<img src="show-me/' + contentList[index].logo + '" alt="Logo" class="drop-shadow">');
+						stuff = true;
+					}
+					if(contentList[index].text){
+						cBox.append('<h1 class="drop-shadow">' + contentList[index].text + '</h1>');
+						stuff = true;
+					}
+					
+				});
+				
+				checkLoaded();
+				
+			}
+			
+			function checkLoaded(){
+				
+				var cnt = 0;
+				if (stuff && $("#wContent img").length > 0){
+					
+					$("#wContent img").each(function(index){
+						$(this).load(function(){
+
+							++cnt;
+
+							if (cnt >= $("#wContent img").length){
+
+								playDisplay();
+
+							}
+
+						});
+					});
+					
+				} else {
+					playDisplay();
+				}
+				
+			}
+			
+			function rotateBKGD(){
+				
+				var BKGD = $('#wrapper');
+				
+				BKGD.animate({"background-position": "+=100%"}, 40000);
+				BKGD.animate({"background-position": "-=100%"}, 40000, function(){
+					rotateBKGD();	
+				});
+			}
+			
+			function playDisplay(){
+				
+				var iBox = $('#iContent');
+				var cBox = $('#wContent');
+				var oBox = $('#oContent');
+				var ownShip = $('#ownship');
+				var col = $('#column');
+
+				iBox.css({
+					top: $(window).height()/2 - iBox.height()/2,
+				});
+				
+				cBox.css({
+					top: -1 * cBox.height() + "px"
+				});
+				
+				oBox.css({
+					top: -1 * oBox.height() + "px"
+				});
+				
+				ownShip.css({
+					transform: "rotate(45deg)",
+					top: "100%",
+					left: "-1000px"
+				});
+				
+				iBox.animate({opacity:1},1000);
+				iBox.delay(2000);
+				iBox.animate({opacity:0},1000, function(){
+					
+					ownShip.animate({top:"-1000px", left:"100%"}, 4000);
+					
+					if(stuff){
+						cBox.delay(3000);
+						
+						cBox.animate({top: col.height()/2 - cBox.height()/2}, 3000);
+						cBox.delay(5000);
+						cBox.animate({top: $(window).height() + 20}, 3000, function(){
+
+							ownShip.css({
+								transform: "rotate(135deg)",
+								top: "-1000px",
+								left: "-1000px"
+							});
+
+							ownShip.animate({top:"100%", left:"100%"}, 4000);
+							oBox.delay(3000);
+
+							oBox.animate({top: col.height()/2 - oBox.height()/2}, 4000);
+							oBox.delay(8000);
+							oBox.animate({top: $(window).height() + 20}, 4000, function(){
+								playDisplay();
+							});
+						});	
+					} else {
+
+						oBox.delay(3000);
+
+						oBox.animate({top: col.height()/2 - oBox.height()/2}, 4000);
+						oBox.delay(8000);
+						oBox.animate({top: $(window).height() + 20}, 4000, function(){
+							playDisplay();
+						});
+
+					}
+					
+				});	
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<div id="wrapper">
+			<div id="column" class="blue-gradient">
+				<div id="iContent">
+					<h1 class="drop-shadow">Welcome to</h1>
+					<img class="drop-shadow" src="images/logo.svg" alt="Jeppesen"/>
+				</div>
+				<div id="wContent" class="">
+					<p class="message drop-shadow">Jeppesen would like <br/>to welcome:</p>
+				</div>
+				<div id="oContent">
+					<p class="drop-shadow">All visitors must register with <br/>the receptionist.</p>
+					<p class="drop-shadow">Escort is required beyond this point.</p>
+					<p class="drop-shadow">Thank you for <br/>your cooperation.</p>
+				</div>
+			</div>
+		</div>
+		<div id="ownship">
+			<img src="images/ownship.svg" alt="ownship"/>
+		</div>
+	</body>
+</html>
