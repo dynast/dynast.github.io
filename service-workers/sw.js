@@ -10,6 +10,7 @@ self.addEventListener('install', function (event) {
         './sw.js',
         './scripts/jquery-3.3.1.min.js',
         './scripts/main.js'
+
       ]);
         })
     );
