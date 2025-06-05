@@ -2,6 +2,7 @@ $(function () {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-workers/sw.js', {
             scope: '/service-workers/'
+
         }).then(function (reg) {
 
             if (reg.installing) {

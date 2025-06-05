@@ -1,13 +1,16 @@
 self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open('v1').then(function (cache) {
+            // Cache all resources relative to the service worker so it works
+            // when the site is served from a subdirectory (e.g. GitHub Pages).
             return cache.addAll([
-        '/dynast.github.io/service-workers/',
-        '/dynast.github.io/service-workers/index.html',
-        '/dynast.github.io/service-workers/scripts/app.js',
-        '/dynast.github.io/service-workers/sw.js',
-        '/dynast.github.io/service-workers/scripts/jquery-3.3.1.min.js',
-        '/dynast.github.io/service-workers/scripts/main.js'
+        './',
+        './index.html',
+        './scripts/app.js',
+        './sw.js',
+        './scripts/jquery-3.3.1.min.js',
+        './scripts/main.js'
+
       ]);
         })
     );
@@ -31,7 +34,7 @@ self.addEventListener('fetch', function (event) {
                 });
                 return response;
             }).catch(function () {
-                /*return caches.match('/sw-test/gallery/myLittleVader.jpg');*/
+                // Optionally return a cached fallback asset here
             });
         }
     }));
