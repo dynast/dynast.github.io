@@ -1,13 +1,15 @@
 self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open('v1').then(function (cache) {
+            // Cache all resources relative to the service worker so it works
+            // when the site is served from a subdirectory (e.g. GitHub Pages).
             return cache.addAll([
-        '/dynast.github.io/',
-        '/dynast.github.io/index.html',
-        '/dynast.github.io/scripts/app.js',
-        '/dynast.github.io/sw.js',
-        '/dynast.github.io/scripts/jquery-3.3.1.min.js',
-        '/dynast.github.io/scripts/main.js'
+        './',
+        './index.html',
+        './scripts/app.js',
+        './sw.js',
+        './scripts/jquery-3.3.1.min.js',
+        './scripts/main.js'
       ]);
         })
     );
