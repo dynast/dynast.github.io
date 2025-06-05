@@ -2,12 +2,12 @@ self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open('v1').then(function (cache) {
             return cache.addAll([
-        '/dynast.github.io/',
-        '/dynast.github.io/index.html',
-        '/dynast.github.io/scripts/app.js',
-        '/dynast.github.io/sw.js',
-        '/dynast.github.io/scripts/jquery-3.3.1.min.js',
-        '/dynast.github.io/scripts/main.js'
+        '/dynast.github.io/service-workers/',
+        '/dynast.github.io/service-workers/index.html',
+        '/dynast.github.io/service-workers/scripts/app.js',
+        '/dynast.github.io/service-workers/sw.js',
+        '/dynast.github.io/service-workers/scripts/jquery-3.3.1.min.js',
+        '/dynast.github.io/service-workers/scripts/main.js'
       ]);
         })
     );

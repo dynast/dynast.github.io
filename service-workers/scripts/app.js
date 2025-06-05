@@ -1,6 +1,6 @@
 $(function () {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js', {
+        navigator.serviceWorker.register('/service-workers/sw.js', {
             scope: '/service-workers/'
         }).then(function (reg) {
 
