@@ -1,7 +1,11 @@
 $(function () {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js', {
-            scope: '/dynast.github.io/'
+        // Register the service worker relative to this directory so the path
+        // matches the actual file location. Using an absolute path caused the
+        // registration to fail because the file does not exist at the root of
+        // the site when hosted on GitHub Pages.
+        navigator.serviceWorker.register('sw.js', {
+            scope: './'
         }).then(function (reg) {
 
             if (reg.installing) {
