@@ -1,7 +1,7 @@
 $(function () {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js', {
-            scope: '/dynast.github.io/'
+        navigator.serviceWorker.register('sw.js', {
+            scope: '/service-workers/'
         }).then(function (reg) {
 
             if (reg.installing) {
